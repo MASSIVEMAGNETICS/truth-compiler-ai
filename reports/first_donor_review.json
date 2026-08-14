@@ -1,0 +1,97 @@
+{
+  "report_type": "truth_compiler_first_donor_review",
+  "report_version": "0.1.0",
+  "generated_by": "truth-compiler-ai",
+  "scope": "public root-level GitHub evidence snapshot",
+  "calibration": {
+    "learned_model_score": "UNAVAILABLE_NOT_CALIBRATED",
+    "deterministic_review_priority": "ENABLED",
+    "authoritative_truth_decision": "DISABLED"
+  },
+  "laws": [
+    "PREDICTION != PROVEN",
+    "UNKNOWN != PASS",
+    "AI may prioritize evidence. AI may never manufacture evidence."
+  ],
+  "repositories": [
+    {
+      "repository": "MASSIVEMAGNETICS/victor",
+      "ref": "ai-algorithms-v2",
+      "observed_evidence": {
+        "root_entries": 9,
+        "readme_bytes": 8184,
+        "python_source_files_observed": 4,
+        "requirements_file": true,
+        "tests_directory_observed": true,
+        "cmake_file_observed": false,
+        "ci_workflow_observed": "NOT_INSPECTED",
+        "manifest_sha_observed": "NOT_OBSERVED_IN_ROOT_SNAPSHOT"
+      },
+      "deterministic_review_priority": 0.82,
+      "ranking_signal": "HIGH_PRIORITY_REVIEW",
+      "decision": "REVIEW_ONLY",
+      "rationale": [
+        "multi-organ Python root with causal and tokenizer components",
+        "tests directory exists but test contents were not yet hydrated",
+        "no CMake build definition observed in the sampled root",
+        "manifest SHA was not observed in the sampled root"
+      ],
+      "authoritative_status": "PENDING_TRUTH_COMPILER_ASSESSMENT"
+    },
+    {
+      "repository": "MASSIVEMAGNETICS/victor_swarm",
+      "ref": "main",
+      "observed_evidence": {
+        "root_entries": 6,
+        "readme_bytes": 14,
+        "user_manual_bytes": 4343,
+        "tests_directory_observed": "NOT_OBSERVED_IN_ROOT_SNAPSHOT",
+        "python_math_directory_observed": true,
+        "cmake_file_observed": false,
+        "manifest_sha_observed": "NOT_OBSERVED_IN_ROOT_SNAPSHOT"
+      },
+      "deterministic_review_priority": 0.74,
+      "ranking_signal": "HIGH_PRIORITY_REVIEW",
+      "decision": "REVIEW_ONLY",
+      "rationale": [
+        "very small README relative to a named swarm subsystem",
+        "mathematical package exists but executable/test evidence needs hydration",
+        "no CMake build definition observed in the sampled root",
+        "manifest SHA was not observed in the sampled root"
+      ],
+      "authoritative_status": "PENDING_TRUTH_COMPILER_ASSESSMENT"
+    },
+    {
+      "repository": "MASSIVEMAGNETICS/ComfyCortex",
+      "ref": "master",
+      "observed_evidence": {
+        "root_entries": "MULTI_ENTRY",
+        "readme_bytes": "NOT_COUNTED",
+        "python_source_files_observed": 12,
+        "requirements_file": true,
+        "pyproject_file": true,
+        "pytest_config_observed": true,
+        "tests_directory_observed": true,
+        "cmake_file_observed": false,
+        "manifest_sha_observed": "NOT_OBSERVED_IN_ROOT_SNAPSHOT"
+      },
+      "deterministic_review_priority": 0.68,
+      "ranking_signal": "REVIEW",
+      "decision": "REVIEW_ONLY",
+      "rationale": [
+        "substantial Python execution and model-serving surface",
+        "pytest configuration and tests directories are present",
+        "dependency and packaging metadata are present",
+        "manifest and provenance status require deeper file-level audit"
+      ],
+      "authoritative_status": "PENDING_TRUTH_COMPILER_ASSESSMENT"
+    }
+  ],
+  "next_hydration": [
+    "enumerate full file trees at pinned commit SHAs",
+    "inspect CI workflows and test contents",
+    "collect build and runtime receipts without executing repository code",
+    "label findings with PASS/FAIL/UNKNOWN/PARTIAL through deterministic policy",
+    "train truth_ai only after verified labels exist"
+  ]
+}
