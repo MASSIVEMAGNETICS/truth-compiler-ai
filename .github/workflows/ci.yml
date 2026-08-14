@@ -1,0 +1,22 @@
+name: truth-compiler-ai
+on: [push, pull_request]
+jobs:
+  build-test:
+    strategy: {matrix: {compiler: [g++, clang++]}}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y cmake ninja-build g++ clang valgrind lcov
+      - run: ${{ matrix.compiler }} --version
+      - run: cmake -S . -B build -G Ninja -DCMAKE_CXX_COMPILER=${{ matrix.compiler }} -DTRUTH_ENABLE_SANITIZERS=ON
+      - run: cmake --build build --parallel
+      - run: ctest --test-dir build --output-on-failure
+      - run: ./build/truth_ai_demo
+      - run: valgrind --error-exitcode=1 --leak-check=full ./build/truth_ai_tests
+  static-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y clang-tidy cmake ninja-build
+      - run: cmake -S . -B build -G Ninja -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_CXX_CLANG_TIDY=clang-tidy
+      - run: cmake --build build --parallel

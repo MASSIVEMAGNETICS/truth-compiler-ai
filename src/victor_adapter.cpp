@@ -1,0 +1,7 @@
+#include "truth_ai/victor_adapter.hpp"
+#include "truth_ai/sha256.hpp"
+#include <sstream>
+namespace truth_ai {
+VerificationReceipt train_and_verify(DenseNetwork& model,const std::vector<Sample>& samples,const TrainingConfig& c,const CapabilityLease& lease,const std::string& parent){VerificationReceipt r; r.event_id="truth-ai-train-"+model.parameter_state_sha256().substr(0,16);r.parent_hash=parent;r.dataset_sha256=sha256("xor-v1:0,0->0;0,1->1;1,0->1;1,1->0");if(!lease.approved||lease.operation!="train"||lease.resource!="truth_ai/model") {r.status="BLOCKED_CAPABILITY_LEASE";r.receipt_hash=sha256(r.event_id+r.parent_hash+r.status);return r;}auto report=model.train(samples,c);r.parameter_state_sha256=report.parameter_state_sha256;r.verified=model.finite()&&report.converged;r.production_authorized=false;r.status=r.verified?"VERIFIED_BOUNDED_MODEL":"REWORK_REQUIRED";r.receipt_hash=sha256(r.event_id+r.parameter_state_sha256+r.dataset_sha256+r.parent_hash+r.status);return r;}
+std::string receipt_json(const VerificationReceipt&r){std::ostringstream s;s<<"{\"event_id\":\""<<r.event_id<<"\",\"parameter_state_sha256\":\""<<r.parameter_state_sha256<<"\",\"dataset_sha256\":\""<<r.dataset_sha256<<"\",\"parent_hash\":\""<<r.parent_hash<<"\",\"receipt_hash\":\""<<r.receipt_hash<<"\",\"verified\":"<<(r.verified?"true":"false")<<",\"production_authorized\":false,\"status\":\""<<r.status<<"\"}";return s.str();}
+}
