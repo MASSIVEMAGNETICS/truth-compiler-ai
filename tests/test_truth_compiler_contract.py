@@ -60,6 +60,40 @@ class TruthCompilerContractTests(unittest.TestCase):
         self.assertEqual(result.independent_support_groups, ("same-origin",))
         self.assertIn("insufficient_independent_support", result.reasons)
 
+    def test_duplicate_evidence_identity_is_rejected(self):
+        evidence = [
+            {
+                "evidence_id": "e1",
+                "status": "SUPPORTED",
+                "source": "owner",
+                "independence_group": "owner",
+                "provenance": prov("owner-support"),
+                "facts": {"owner_authorized": True},
+            },
+            {
+                "evidence_id": "e1",
+                "status": "CONTRADICTED",
+                "source": "other",
+                "independence_group": "other",
+                "provenance": prov("owner-contradiction"),
+                "facts": {"owner_authorized": False},
+            },
+        ]
+        with self.assertRaisesRegex(ValueError, "duplicate evidence_id"):
+            TruthCompiler().compile(request(evidence))
+
+    def test_blank_evidence_identity_is_rejected(self):
+        evidence = [{
+            "evidence_id": "   ",
+            "status": "SUPPORTED",
+            "source": "owner",
+            "independence_group": "owner",
+            "provenance": prov("owner"),
+            "facts": {"owner_authorized": True},
+        }]
+        with self.assertRaisesRegex(ValueError, "evidence_id is required"):
+            TruthCompiler().compile(request(evidence))
+
     def test_unknown_and_missing_provenance_fail_closed(self):
         evidence = [{
             "evidence_id": "e1",
