@@ -53,8 +53,11 @@ class EvidenceItem:
         missing = required - set(row)
         if missing:
             raise ValueError(f"evidence missing fields: {sorted(missing)}")
+        evidence_id = str(row["evidence_id"]).strip()
+        if not evidence_id:
+            raise ValueError("evidence_id is required")
         return cls(
-            evidence_id=str(row["evidence_id"]),
+            evidence_id=evidence_id,
             status=EvidenceStatus(str(row["status"]).upper()),
             source=str(row["source"]),
             independence_group=str(row["independence_group"]),
@@ -73,7 +76,12 @@ class EvidenceVector:
 
     @classmethod
     def from_rows(cls, rows: Sequence[Mapping[str, Any]]) -> "EvidenceVector":
-        return cls(tuple(EvidenceItem.from_dict(row) for row in rows))
+        items = tuple(EvidenceItem.from_dict(row) for row in rows)
+        evidence_ids = [item.evidence_id for item in items]
+        duplicate_ids = sorted({evidence_id for evidence_id in evidence_ids if evidence_ids.count(evidence_id) > 1})
+        if duplicate_ids:
+            raise ValueError(f"duplicate evidence_id values are not allowed: {duplicate_ids}")
+        return cls(items)
 
     def independent_groups(self, status: EvidenceStatus) -> set[str]:
         return {
