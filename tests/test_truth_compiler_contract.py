@@ -94,6 +94,18 @@ class TruthCompilerContractTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "evidence_id is required"):
             TruthCompiler().compile(request(evidence))
 
+    def test_malformed_authority_value_is_rejected(self):
+        evidence = [{
+            "evidence_id": "e1",
+            "status": "SUPPORTED",
+            "source": "owner",
+            "independence_group": "owner",
+            "provenance": prov("owner"),
+            "facts": {"owner_authorized": True},
+        }]
+        with self.assertRaisesRegex(ValueError, "authority_allowed must be a boolean"):
+            TruthCompiler().compile(request(evidence, authority_allowed="false"))
+
     def test_unknown_and_missing_provenance_fail_closed(self):
         evidence = [{
             "evidence_id": "e1",
