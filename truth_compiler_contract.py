@@ -123,8 +123,11 @@ class Policy:
 
     @classmethod
     def from_dict(cls, row: Mapping[str, Any]) -> "Policy":
+        authority_allowed = row.get("authority_allowed", False)
+        if not isinstance(authority_allowed, bool):
+            raise ValueError("policy.authority_allowed must be a boolean")
         return cls(
-            authority_allowed=bool(row.get("authority_allowed", False)),
+            authority_allowed=authority_allowed,
             min_independent_support=max(1, int(row.get("min_independent_support", 1))),
             max_contradictions=max(0, int(row.get("max_contradictions", 0))),
             required_fact_keys=tuple(sorted(str(x) for x in row.get("required_fact_keys", []))),
