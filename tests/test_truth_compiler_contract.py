@@ -28,6 +28,16 @@ def request(evidence, **policy):
 
 
 class TruthCompilerContractTests(unittest.TestCase):
+    def valid_evidence(self):
+        return [{
+            "evidence_id": "e1",
+            "status": "SUPPORTED",
+            "source": "owner",
+            "independence_group": "owner",
+            "provenance": prov("owner"),
+            "facts": {"owner_authorized": True},
+        }]
+
     def test_verified_requires_provenance_independence_and_required_fact(self):
         result = TruthCompiler().compile(request([
             {
@@ -95,16 +105,42 @@ class TruthCompilerContractTests(unittest.TestCase):
             TruthCompiler().compile(request(evidence))
 
     def test_malformed_authority_value_is_rejected(self):
-        evidence = [{
-            "evidence_id": "e1",
-            "status": "SUPPORTED",
-            "source": "owner",
-            "independence_group": "owner",
-            "provenance": prov("owner"),
-            "facts": {"owner_authorized": True},
-        }]
         with self.assertRaisesRegex(ValueError, "authority_allowed must be a boolean"):
-            TruthCompiler().compile(request(evidence, authority_allowed="false"))
+            TruthCompiler().compile(request(self.valid_evidence(), authority_allowed="false"))
+
+    def test_policy_thresholds_require_native_integers(self):
+        malformed_values = ("2", 1.5, True, None)
+        for value in malformed_values:
+            with self.subTest(min_independent_support=value):
+                with self.assertRaisesRegex(ValueError, "min_independent_support must be an integer"):
+                    TruthCompiler().compile(request(self.valid_evidence(), min_independent_support=value))
+
+        for value in malformed_values:
+            with self.subTest(max_contradictions=value):
+                with self.assertRaisesRegex(ValueError, "max_contradictions must be an integer"):
+                    TruthCompiler().compile(request(self.valid_evidence(), max_contradictions=value))
+
+    def test_policy_thresholds_reject_out_of_range_values(self):
+        with self.assertRaisesRegex(ValueError, "min_independent_support must be >= 1"):
+            TruthCompiler().compile(request(self.valid_evidence(), min_independent_support=0))
+        with self.assertRaisesRegex(ValueError, "max_contradictions must be >= 0"):
+            TruthCompiler().compile(request(self.valid_evidence(), max_contradictions=-1))
+
+    def test_required_fact_keys_require_list_of_non_empty_strings(self):
+        with self.assertRaisesRegex(ValueError, "required_fact_keys must be a list of strings"):
+            TruthCompiler().compile(request(self.valid_evidence(), required_fact_keys="owner_authorized"))
+        with self.assertRaisesRegex(ValueError, "required_fact_keys must contain non-empty strings"):
+            TruthCompiler().compile(request(self.valid_evidence(), required_fact_keys=["owner_authorized", " "]))
+        with self.assertRaisesRegex(ValueError, "required_fact_keys must contain non-empty strings"):
+            TruthCompiler().compile(request(self.valid_evidence(), required_fact_keys=["owner_authorized", 7]))
+
+    def test_required_fact_keys_are_normalized_deterministically(self):
+        result = TruthCompiler().compile(request(
+            self.valid_evidence(),
+            required_fact_keys=[" owner_authorized ", "owner_authorized"],
+        ))
+        self.assertEqual(result.verdict, TruthVerdict.VERIFIED)
+        self.assertEqual(result.missing_fact_keys, ())
 
     def test_unknown_and_missing_provenance_fail_closed(self):
         evidence = [{
@@ -121,27 +157,12 @@ class TruthCompilerContractTests(unittest.TestCase):
         self.assertIn("e1", result.unknown_evidence_ids)
 
     def test_policy_denial_is_distinct_from_evidence_unknown(self):
-        evidence = [{
-            "evidence_id": "e1",
-            "status": "SUPPORTED",
-            "source": "owner",
-            "independence_group": "owner",
-            "provenance": prov("owner"),
-            "facts": {"owner_authorized": True},
-        }]
-        result = TruthCompiler().compile(request(evidence, authority_allowed=False))
+        result = TruthCompiler().compile(request(self.valid_evidence(), authority_allowed=False))
         self.assertEqual(result.verdict, TruthVerdict.DENIED)
         self.assertEqual(result.policy_state, "DENIED")
 
     def test_cli_round_trip(self):
-        payload = request([{
-            "evidence_id": "e1",
-            "status": "SUPPORTED",
-            "source": "owner",
-            "independence_group": "owner",
-            "provenance": prov("owner"),
-            "facts": {"owner_authorized": True},
-        }])
+        payload = request(self.valid_evidence())
         proc = subprocess.run(
             [sys.executable, "truth_compiler_contract.py"],
             input=json.dumps(payload),
