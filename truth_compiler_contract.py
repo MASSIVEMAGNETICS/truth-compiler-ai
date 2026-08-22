@@ -121,16 +121,36 @@ class Policy:
     max_contradictions: int = 0
     required_fact_keys: tuple[str, ...] = ()
 
+    @staticmethod
+    def _strict_int(row: Mapping[str, Any], key: str, default: int, minimum: int) -> int:
+        value = row.get(key, default)
+        # bool is a subclass of int in Python, so reject it explicitly.
+        if isinstance(value, bool) or not isinstance(value, int):
+            raise ValueError(f"policy.{key} must be an integer")
+        if value < minimum:
+            raise ValueError(f"policy.{key} must be >= {minimum}")
+        return value
+
     @classmethod
     def from_dict(cls, row: Mapping[str, Any]) -> "Policy":
         authority_allowed = row.get("authority_allowed", False)
         if not isinstance(authority_allowed, bool):
             raise ValueError("policy.authority_allowed must be a boolean")
+
+        raw_required_fact_keys = row.get("required_fact_keys", [])
+        if not isinstance(raw_required_fact_keys, list):
+            raise ValueError("policy.required_fact_keys must be a list of strings")
+        required_fact_keys: list[str] = []
+        for value in raw_required_fact_keys:
+            if not isinstance(value, str) or not value.strip():
+                raise ValueError("policy.required_fact_keys must contain non-empty strings")
+            required_fact_keys.append(value.strip())
+
         return cls(
             authority_allowed=authority_allowed,
-            min_independent_support=max(1, int(row.get("min_independent_support", 1))),
-            max_contradictions=max(0, int(row.get("max_contradictions", 0))),
-            required_fact_keys=tuple(sorted(str(x) for x in row.get("required_fact_keys", []))),
+            min_independent_support=cls._strict_int(row, "min_independent_support", 1, 1),
+            max_contradictions=cls._strict_int(row, "max_contradictions", 0, 0),
+            required_fact_keys=tuple(sorted(set(required_fact_keys))),
         )
 
 
