@@ -15,7 +15,7 @@ jobs:
       - run: cmake -S . -B build-valgrind -G Ninja -DCMAKE_CXX_COMPILER=${{ matrix.compiler }} -DTRUTH_ENABLE_SANITIZERS=OFF
       - run: cmake --build build-valgrind --parallel
       - run: valgrind --error-exitcode=1 --leak-check=full ./build-valgrind/truth_ai_tests
-      - run: python3 -m unittest discover -s tests -p 'test_protector_release_governor.py' -v
+      - run: python3 -m unittest discover -s tests -p 'test_*.py' -v
   static-analysis:
     runs-on: ubuntu-latest
     steps:
@@ -23,4 +23,3 @@ jobs:
       - run: sudo apt-get update && sudo apt-get install -y clang-tidy cmake ninja-build
       - run: cmake -S . -B build -G Ninja -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_CXX_CLANG_TIDY=clang-tidy
       - run: cmake --build build --parallel
-
