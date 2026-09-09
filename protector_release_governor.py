@@ -16,6 +16,7 @@ import uuid
 from dataclasses import dataclass
 from enum import Enum
 from pathlib import Path
+from types import TracebackType
 from typing import Any, Dict, Iterable, List, Optional, Tuple
 
 
@@ -122,6 +123,17 @@ class ProtectorReleaseGovernor:
 
     def close(self) -> None:
         self.conn.close()
+
+    def __enter__(self) -> ProtectorReleaseGovernor:
+        return self
+
+    def __exit__(
+        self,
+        exc_type: type[BaseException] | None,
+        exc: BaseException | None,
+        traceback: TracebackType | None,
+    ) -> None:
+        self.close()
 
     def _schema(self) -> None:
         self.conn.executescript(
@@ -292,5 +304,4 @@ class ProtectorReleaseGovernor:
         if row["state"] != ReleaseState.CTA_DEFINED.value:
             raise InvalidTransition("funnel lock requires CTA_DEFINED state")
         self._advance(release_id, ReleaseState.CTA_DEFINED, ReleaseState.FUNNEL_VERIFIED, verified_at=time.time())
-
 

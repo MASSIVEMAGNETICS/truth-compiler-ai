@@ -1,0 +1,299 @@
+{
+  "exact_duplicate_groups": [
+    {
+      "file_count": 2,
+      "files": [
+        {
+          "relative_path": "Backups/North Coast Signal - master COPY.wav",
+          "status": "ok"
+        },
+        {
+          "relative_path": "Sessions/North Coast Signal - master.wav",
+          "status": "ok"
+        }
+      ],
+      "group": "exact-bbf099afeb07",
+      "reclaimable_bytes": 17196,
+      "sha256": "bbf099afeb076b899762a02545b7334c3155660f28e16786c3d4fe21f28e768b",
+      "size_bytes": 17196
+    }
+  ],
+  "files": [
+    {
+      "album": "Recovered Sessions",
+      "album_artist": "",
+      "artist": "Synthetic Demo Creator",
+      "bitrate": 128000,
+      "bits_per_sample": 16,
+      "channels": 1,
+      "composer": "",
+      "container": "WAVE",
+      "copyright": "",
+      "date": "2026",
+      "disc_number": "",
+      "duplicate_count": 2,
+      "duplicate_group": "exact-bbf099afeb07",
+      "duration_seconds": 1.0,
+      "error_code": null,
+      "error_message": null,
+      "extension": ".wav",
+      "file_name": "North Coast Signal - master COPY.wav",
+      "genre": "",
+      "isrc": "",
+      "metadata": {
+        "album": "Recovered Sessions",
+        "album_artist": "",
+        "artist": "Synthetic Demo Creator",
+        "bitrate": 128000,
+        "bits_per_sample": 16,
+        "channels": 1,
+        "comment": "",
+        "composer": "",
+        "container": "WAVE",
+        "copyright": "",
+        "date": "2026",
+        "disc_number": "",
+        "duration_seconds": 1.0,
+        "genre": "",
+        "isrc": "",
+        "sample_rate": 8000,
+        "tags": {
+          "talb": [
+            "Recovered Sessions"
+          ],
+          "tdrc": [
+            "2026"
+          ],
+          "tit2": [
+            "North Coast Signal"
+          ],
+          "tpe1": [
+            "Synthetic Demo Creator"
+          ]
+        },
+        "title": "North Coast Signal",
+        "track_number": ""
+      },
+      "mtime_ns": 1788954239455740988,
+      "relative_path": "Backups/North Coast Signal - master COPY.wav",
+      "sample_rate": 8000,
+      "scanned_at": "2026-09-09T11:43:59Z",
+      "sha256": "bbf099afeb076b899762a02545b7334c3155660f28e16786c3d4fe21f28e768b",
+      "size_bytes": 17196,
+      "status": "ok",
+      "title": "North Coast Signal",
+      "track_number": ""
+    },
+    {
+      "album": "",
+      "album_artist": "",
+      "artist": "",
+      "bitrate": null,
+      "bits_per_sample": null,
+      "channels": null,
+      "composer": "",
+      "container": "",
+      "copyright": "",
+      "date": "",
+      "disc_number": "",
+      "duplicate_count": 0,
+      "duplicate_group": "",
+      "duration_seconds": null,
+      "error_code": "metadata_unreadable",
+      "error_message": "metadata could not be decoded: can't sync to MPEG frame",
+      "extension": ".mp3",
+      "file_name": "Damaged Export.mp3",
+      "genre": "",
+      "isrc": "",
+      "metadata": {
+        "album": "",
+        "album_artist": "",
+        "artist": "",
+        "bitrate": null,
+        "bits_per_sample": null,
+        "channels": null,
+        "comment": "",
+        "composer": "",
+        "container": "",
+        "copyright": "",
+        "date": "",
+        "disc_number": "",
+        "duration_seconds": null,
+        "genre": "",
+        "isrc": "",
+        "sample_rate": null,
+        "tags": {},
+        "title": "",
+        "track_number": ""
+      },
+      "mtime_ns": 1788954239457116795,
+      "relative_path": "Damaged Export.mp3",
+      "sample_rate": null,
+      "scanned_at": "2026-09-09T11:43:59Z",
+      "sha256": "88afe3483332d95992daf6e528226e81698ff001d34148d5442e9d8b836ceb8f",
+      "size_bytes": 31,
+      "status": "metadata_error",
+      "title": "",
+      "track_number": ""
+    },
+    {
+      "album": "",
+      "album_artist": "",
+      "artist": "",
+      "bitrate": 128000,
+      "bits_per_sample": 16,
+      "channels": 1,
+      "composer": "",
+      "container": "WAVE",
+      "copyright": "",
+      "date": "",
+      "disc_number": "",
+      "duplicate_count": 0,
+      "duplicate_group": "",
+      "duration_seconds": 1.0,
+      "error_code": null,
+      "error_message": null,
+      "extension": ".wav",
+      "file_name": "North Coast Signal - alt mix.wav",
+      "genre": "",
+      "isrc": "",
+      "metadata": {
+        "album": "",
+        "album_artist": "",
+        "artist": "",
+        "bitrate": 128000,
+        "bits_per_sample": 16,
+        "channels": 1,
+        "comment": "",
+        "composer": "",
+        "container": "WAVE",
+        "copyright": "",
+        "date": "",
+        "disc_number": "",
+        "duration_seconds": 1.0,
+        "genre": "",
+        "isrc": "",
+        "sample_rate": 8000,
+        "tags": {},
+        "title": "",
+        "track_number": ""
+      },
+      "mtime_ns": 1788954239457062493,
+      "relative_path": "Sessions/North Coast Signal - alt mix.wav",
+      "sample_rate": 8000,
+      "scanned_at": "2026-09-09T11:43:59Z",
+      "sha256": "be2f81c39e183f2f0d8ffc224b2c2dedf8d9b863f1d3d3b8f04676b56acba022",
+      "size_bytes": 16044,
+      "status": "ok",
+      "title": "",
+      "track_number": ""
+    },
+    {
+      "album": "Recovered Sessions",
+      "album_artist": "",
+      "artist": "Synthetic Demo Creator",
+      "bitrate": 128000,
+      "bits_per_sample": 16,
+      "channels": 1,
+      "composer": "",
+      "container": "WAVE",
+      "copyright": "",
+      "date": "2026",
+      "disc_number": "",
+      "duplicate_count": 2,
+      "duplicate_group": "exact-bbf099afeb07",
+      "duration_seconds": 1.0,
+      "error_code": null,
+      "error_message": null,
+      "extension": ".wav",
+      "file_name": "North Coast Signal - master.wav",
+      "genre": "",
+      "isrc": "",
+      "metadata": {
+        "album": "Recovered Sessions",
+        "album_artist": "",
+        "artist": "Synthetic Demo Creator",
+        "bitrate": 128000,
+        "bits_per_sample": 16,
+        "channels": 1,
+        "comment": "",
+        "composer": "",
+        "container": "WAVE",
+        "copyright": "",
+        "date": "2026",
+        "disc_number": "",
+        "duration_seconds": 1.0,
+        "genre": "",
+        "isrc": "",
+        "sample_rate": 8000,
+        "tags": {
+          "talb": [
+            "Recovered Sessions"
+          ],
+          "tdrc": [
+            "2026"
+          ],
+          "tit2": [
+            "North Coast Signal"
+          ],
+          "tpe1": [
+            "Synthetic Demo Creator"
+          ]
+        },
+        "title": "North Coast Signal",
+        "track_number": ""
+      },
+      "mtime_ns": 1788954239455416338,
+      "relative_path": "Sessions/North Coast Signal - master.wav",
+      "sample_rate": 8000,
+      "scanned_at": "2026-09-09T11:43:59Z",
+      "sha256": "bbf099afeb076b899762a02545b7334c3155660f28e16786c3d4fe21f28e768b",
+      "size_bytes": 17196,
+      "status": "ok",
+      "title": "North Coast Signal",
+      "track_number": ""
+    }
+  ],
+  "generated_at": "2026-09-09T11:43:59Z",
+  "issues": [
+    {
+      "code": "metadata_unreadable",
+      "message": "metadata could not be decoded: can't sync to MPEG frame",
+      "recorded_at": "2026-09-09T11:43:59Z",
+      "relative_path": "Damaged Export.mp3",
+      "stage": "file"
+    }
+  ],
+  "limitations": [
+    "Exact duplicates require byte-for-byte identity and share one SHA-256 hash.",
+    "Similar-sounding or transcoded audio is not classified as an exact duplicate.",
+    "Source audio is inventoried read-only; no deletion, rename, retag, or move is performed."
+  ],
+  "scan": {
+    "bytes_hashed": 50467,
+    "completed_at": "2026-09-09T11:43:59Z",
+    "error_message": null,
+    "files_discovered": 4,
+    "files_processed": 4,
+    "files_reused": 0,
+    "files_with_errors": 1,
+    "id": 1,
+    "root_path": "AUTHORIZED_SYNTHETIC_SAMPLE",
+    "started_at": "2026-09-09T11:43:59Z",
+    "status": "completed",
+    "tool_version": "0.1.0",
+    "updated_at": "2026-09-09T11:43:59Z"
+  },
+  "schema_version": "1.0.0",
+  "summary": {
+    "catalog_rows": 4,
+    "exact_duplicate_files": 2,
+    "exact_duplicate_groups": 1,
+    "issues": 1,
+    "potential_reclaimable_bytes": 17196
+  },
+  "tool": {
+    "name": "Massive Magnetics Catalog Recovery",
+    "version": "0.1.0"
+  }
+}

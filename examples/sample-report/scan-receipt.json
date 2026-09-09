@@ -1,0 +1,31 @@
+{
+  "generated_at": "2026-09-09T11:43:59Z",
+  "operation_policy": {
+    "source_mutations": "none",
+    "source_open_mode": "read-only binary",
+    "symlinks_followed": false
+  },
+  "reports": {
+    "catalog.csv": {
+      "sha256": "08d194f6081cb26db8b1ef5f254d355346468c2e6245dcbb774151f1215f9434",
+      "size_bytes": 1444
+    },
+    "catalog.json": {
+      "sha256": "5609693c375f9ef51a5c48a18f8e4fee5f6c00de7a0dcfd6f0187dc8ef6a9f78",
+      "size_bytes": 8217
+    },
+    "exact-duplicates.csv": {
+      "sha256": "9cd2f9ed2fb874b1e7624bd3daff19f91de43ada0254210756bf7a745060c58a",
+      "size_bytes": 375
+    },
+    "issues.csv": {
+      "sha256": "764cd400ac7ee8609656fe2d3a26b0fcedf576019d2e9a19aa49b6e97cc0472a",
+      "size_bytes": 168
+    }
+  },
+  "scan_id": 1,
+  "scan_status": "completed",
+  "schema_version": "1.0.0",
+  "source_root": "AUTHORIZED_SYNTHETIC_SAMPLE",
+  "tool_version": "0.1.0"
+}

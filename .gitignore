@@ -1,5 +1,15 @@
 build/
 build-manual/
+.venv/
+dist/
+*.egg-info/
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.sqlite3-shm
+*.sqlite3-wal
+*.spec
+Massive-Magnetics-Catalog-Recovery-*.zip
 *.o
 *.a
 *.so
