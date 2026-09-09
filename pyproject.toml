@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "massive-magnetics-catalog-recovery"
+version = "0.1.0"
+description = "Local-first audio inventory, exact duplicate detection, metadata catalog, and recovery reports."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{name = "Massive Magnetics / Brandon Emery"}]
+dependencies = ["mutagen>=1.47,<2"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Multimedia :: Sound/Audio",
+]
+
+[project.scripts]
+catalog-recovery = "catalog_recovery.cli:main"
+catalog-recovery-gui = "catalog_recovery.gui:run_gui"
+
+[tool.setuptools.packages.find]
+include = ["catalog_recovery*"]

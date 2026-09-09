@@ -1,0 +1,60 @@
+{
+  "authorization": "Synthetic audio generated locally for this verification run.",
+  "catalog_rows": 4,
+  "exact_duplicate_files": 2,
+  "exact_duplicate_groups": 1,
+  "files_with_errors": 1,
+  "generated_at": "2026-09-09T11:43:59Z",
+  "potential_reclaimable_bytes": 17196,
+  "report_receipt_errors": [],
+  "report_receipt_valid": true,
+  "scan_id": 1,
+  "scan_status": "completed",
+  "schema_version": "1.0.0",
+  "source_file_count": 4,
+  "source_files_unchanged": true,
+  "source_manifest_after": {
+    "Backups/North Coast Signal - master COPY.wav": {
+      "mtime_ns": 1788954239455740988,
+      "sha256": "bbf099afeb076b899762a02545b7334c3155660f28e16786c3d4fe21f28e768b",
+      "size_bytes": 17196
+    },
+    "Damaged Export.mp3": {
+      "mtime_ns": 1788954239457116795,
+      "sha256": "88afe3483332d95992daf6e528226e81698ff001d34148d5442e9d8b836ceb8f",
+      "size_bytes": 31
+    },
+    "Sessions/North Coast Signal - alt mix.wav": {
+      "mtime_ns": 1788954239457062493,
+      "sha256": "be2f81c39e183f2f0d8ffc224b2c2dedf8d9b863f1d3d3b8f04676b56acba022",
+      "size_bytes": 16044
+    },
+    "Sessions/North Coast Signal - master.wav": {
+      "mtime_ns": 1788954239455416338,
+      "sha256": "bbf099afeb076b899762a02545b7334c3155660f28e16786c3d4fe21f28e768b",
+      "size_bytes": 17196
+    }
+  },
+  "source_manifest_before": {
+    "Backups/North Coast Signal - master COPY.wav": {
+      "mtime_ns": 1788954239455740988,
+      "sha256": "bbf099afeb076b899762a02545b7334c3155660f28e16786c3d4fe21f28e768b",
+      "size_bytes": 17196
+    },
+    "Damaged Export.mp3": {
+      "mtime_ns": 1788954239457116795,
+      "sha256": "88afe3483332d95992daf6e528226e81698ff001d34148d5442e9d8b836ceb8f",
+      "size_bytes": 31
+    },
+    "Sessions/North Coast Signal - alt mix.wav": {
+      "mtime_ns": 1788954239457062493,
+      "sha256": "be2f81c39e183f2f0d8ffc224b2c2dedf8d9b863f1d3d3b8f04676b56acba022",
+      "size_bytes": 16044
+    },
+    "Sessions/North Coast Signal - master.wav": {
+      "mtime_ns": 1788954239455416338,
+      "sha256": "bbf099afeb076b899762a02545b7334c3155660f28e16786c3d4fe21f28e768b",
+      "size_bytes": 17196
+    }
+  }
+}
