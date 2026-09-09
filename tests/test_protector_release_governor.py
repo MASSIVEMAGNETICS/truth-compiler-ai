@@ -13,7 +13,9 @@ from protector_release_governor import (
 class GovernorTests(unittest.TestCase):
     def make_governor(self):
         self.tmp = tempfile.TemporaryDirectory()
-        return ProtectorReleaseGovernor(Path(self.tmp.name) / "governor.sqlite3")
+        governor = ProtectorReleaseGovernor(Path(self.tmp.name) / "governor.sqlite3")
+        self.governors = [governor]
+        return governor
 
     def complete_release(self, governor):
         rid = governor.start_release("Test Release")
@@ -28,6 +30,8 @@ class GovernorTests(unittest.TestCase):
         return rid
 
     def tearDown(self):
+        for governor in getattr(self, "governors", []):
+            governor.close()
         if hasattr(self, "tmp"):
             self.tmp.cleanup()
 
@@ -50,6 +54,7 @@ class GovernorTests(unittest.TestCase):
         db_path = Path(governor.db_path)
         governor.close()
         reopened = ProtectorReleaseGovernor(db_path)
+        self.governors.append(reopened)
         self.assertTrue(reopened.verify_receipts())
         reopened.conn.execute("UPDATE receipts SET payload='tampered' WHERE sequence=1")
         self.assertFalse(reopened.verify_receipts())
@@ -83,4 +88,3 @@ class GovernorTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-
