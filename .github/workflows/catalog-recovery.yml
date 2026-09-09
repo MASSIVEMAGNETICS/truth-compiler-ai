@@ -3,7 +3,7 @@ name: Catalog Recovery CI
 on:
   pull_request:
   push:
-    branches: [main, "codex/catalog-recovery-v1"]
+    branches: [main, "codex/catalog-recovery-v1", "release/catalog-recovery-v*"]
     tags: ["catalog-recovery-v*"]
 
 permissions:
@@ -71,7 +71,9 @@ jobs:
           retention-days: 30
 
   release:
-    if: startsWith(github.ref, 'refs/tags/catalog-recovery-v')
+    if: >-
+      startsWith(github.ref, 'refs/tags/catalog-recovery-v') ||
+      startsWith(github.ref, 'refs/heads/release/catalog-recovery-v')
     needs: package
     runs-on: ubuntu-latest
     permissions:
@@ -88,10 +90,15 @@ jobs:
       - name: Publish GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: >-
-          gh release create "${GITHUB_REF_NAME}"
-          release-assets/*.zip
-          release-assets/SHA256SUMS.txt
-          --verify-tag
-          --title "Massive Magnetics Catalog Recovery ${GITHUB_REF_NAME#catalog-recovery-v}"
-          --notes-file catalog_recovery/RELEASE_NOTES.md
+        run: |
+          release_tag="${GITHUB_REF_NAME#release/}"
+          if gh release view "${release_tag}" >/dev/null 2>&1; then
+            echo "Release ${release_tag} already exists; refusing to replace it."
+            exit 1
+          fi
+          gh release create "${release_tag}" \
+            release-assets/*.zip \
+            release-assets/SHA256SUMS.txt \
+            --target "${GITHUB_SHA}" \
+            --title "Massive Magnetics Catalog Recovery ${release_tag#catalog-recovery-v}" \
+            --notes-file catalog_recovery/RELEASE_NOTES.md

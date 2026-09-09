@@ -33,6 +33,8 @@ Choose the source audio folder and a separate report folder, then select **Start
 
 Unsigned desktop bundles for Windows, macOS, and Linux are produced by the repository's release workflow. Because the preview executables are not code-signed, the operating system may require the owner to review and explicitly allow them. Each release includes `SHA256SUMS.txt` for download verification.
 
+Maintainers publish an immutable release by creating a branch named `release/catalog-recovery-vX.Y.Z` from the accepted `main` commit. The workflow refuses to overwrite an existing release with the same version.
+
 ## Command-line use
 
 ```bash
